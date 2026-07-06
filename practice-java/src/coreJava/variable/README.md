@@ -1,0 +1,9 @@
+# Variable — Questions
+
+| # | Problem Description | File |
+|---|---------------------|------|
+| 1 | Write a Java program to demonstrate a local variable by declaring a balance variable inside `main()` and print it — also show that it cannot be accessed outside its scope | [LocalVariable.java](https://github.com/hello-aaditya/java-journey/blob/main/src/coreJava/variable/LocalVariable.java) |
+| 2 | Write a Java program to demonstrate an instance variable by declaring a balance variable at the class level, initializing it via a constructor, creating an object and printing the balance | [InstanceVariable.java](https://github.com/hello-aaditya/java-journey/blob/main/src/coreJava/variable/InstanceVariable.java) |
+| 3 | Write a Java program to demonstrate a static variable by declaring an interest rate at the class level using the `static` keyword and accessing it using `ClassName.variableName` | [StaticVariable.java](https://github.com/hello-aaditya/java-journey/blob/main/src/coreJava/variable/StaticVariable.java) |
+| 4 | Write a Java program to calculate the total price of a product including GST — use a static variable for the GST percentage, local variables for product name and price, and compute the final total | [CalculateTotal.java](https://github.com/hello-aaditya/java-journey/blob/main/src/coreJava/variable/CalculateTotal.java) |
+| 5 | Write a Java program to simulate an AWS EC2 billing calculator — use static variables for cloud provider, currency, GST and support plan; instance variables for EC2 details (instance ID, name, owner, region, type, OS, running hours, hourly cost, elastic IP); local variables for billing computations (monthly bill, GST, final bill) and print a formatted billing report | [AwsEc2BillingCalculator.java](https://github.com/hello-aaditya/java-journey/blob/main/src/coreJava/variable/AwsEc2BillingCalculator.java) |

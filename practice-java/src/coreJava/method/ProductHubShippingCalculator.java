@@ -1,0 +1,148 @@
+package coreJava.method;
+
+public class ProductHubShippingCalculator {
+	
+	// static VARIABLES
+	static String companyName = "productHub";
+	static String currency = "INR";
+	static int platformFee = 49;
+	static int gstPercentage = 18;
+	static int insuranceCharge = 99;
+	
+	// INSTANCE VARIABLES (NON-STATIC VARIABLES)
+	String shipmentId;
+	String customerName;
+	String productName;
+	double weight;
+	double distance;
+	ShippingMethod shippingMethod;
+	DeliveryZone deliveryZone;
+	boolean insuranceRequired;
+	double orderAmount;
+	
+	public static void main(String[] args) {
+		ProductHubShippingCalculator shipment = new ProductHubShippingCalculator();
+		
+		shipment.shipmentId = args[0];
+		shipment.customerName =args[1];
+		shipment.productName = args[2];
+		shipment.weight = Double.parseDouble(args[3]);
+		shipment.distance = Double.parseDouble(args[4]);
+		shipment.shippingMethod = ShippingMethod.valueOf(args[5]);
+		shipment.deliveryZone = DeliveryZone.valueOf(args[6]);
+		shipment.insuranceRequired = Boolean.parseBoolean(args[7]);
+		shipment.orderAmount = Double.parseDouble(args[8]);
+		
+		// LOCAL VARIABLE
+		double weightCharge = calculateWeightCharge(shipment.weight);
+		double distanceCharge = calculateDistanceCharge(shipment.distance);
+		double shippingCharge = calculateShippingCharge(shipment.weight, shipment.distance);
+		int insurance = calculateInsuranceCharge();
+		double gst = calculateGst(shippingCharge);
+		double finalShippingCost = calculateFinalShippingCost(shippingCharge, insurance, gst);
+		
+		// PRINT SHIPPING INVOICE		
+		printShippingInvoice(shipment, weightCharge, distanceCharge, shippingCharge, insurance, gst, finalShippingCost);
+		
+	}
+	
+	// CALCULATE WEIGHT CHARGE
+	private static double calculateWeightCharge(double weight) {
+		return weight * 20;
+	}
+	
+	// CALCULATE DISTANCE CHARGE
+	private static double calculateDistanceCharge(double distance) {
+		return distance * 2;
+	}
+	
+	// CALCULATE SHIPPING CHARGE
+	private static double calculateShippingCharge(double weight, double distance) {
+		double weightCharge = ProductHubShippingCalculator.calculateWeightCharge(weight);
+		double distanceCharge = ProductHubShippingCalculator.calculateDistanceCharge(distance);
+		return  weightCharge + distanceCharge;
+	}
+	
+	// CALCULATE INSURANCE CHARGE
+	private static int calculateInsuranceCharge() {
+		return insuranceCharge;
+	}
+	
+	// CALCULATE GST
+	private static double calculateGst(double shippingCharge) {
+		return shippingCharge * gstPercentage /  100.0;
+	}
+	
+	// CALCULATE FINAL SHIPPING COST
+	private static double calculateFinalShippingCost(
+				double shippingCharge,
+				int insuranceCharge,
+				double gstCharge
+			) 
+	{
+		double finalShippingCost = shippingCharge + insuranceCharge + gstCharge + platformFee;
+		return finalShippingCost;
+	}
+	
+	// PRINT SHIPPING INVOICE
+	private static void printShippingInvoice(
+			ProductHubShippingCalculator shipment,
+			double weightCharge,
+			double distanceCharge,
+			double shippingCharge,
+			double insurance,
+			double gst,
+			double finalShippingCost
+			) {
+		System.out.println(
+					"==================================================================" +
+					"\nPRODUCTHUB SHIPPING INVOICE" +
+					"\n==================================================================" +
+	
+					"\n\nCOMPANY INFORMATION" +
+					"\n------------------------------------------------------------------" +
+	
+					"\nCompany Name             : " + companyName +
+					"\nCurrency                 : " + currency +
+					"\nGST Percentage           : " + gstPercentage + "%" +
+					"\nPlatform Fee             : ₹" + platformFee +
+	
+					"\n\nSHIPMENT INFORMATION" +
+					"\n------------------------------------------------------------------" +
+	
+					"\nShipment ID              : " + shipment.shipmentId +
+					"\nCustomer Name            : " + shipment.customerName +
+					"\nProduct Name             : " + shipment.productName +
+	
+					"\n\nShipping Method          : " + shipment.shippingMethod +
+					"\nDelivery Zone            : " + shipment.deliveryZone +
+	
+					"\n\nProduct Weight           : " + shipment.weight + " Kg" +
+					"\nDelivery Distance        : " + shipment.distance + " Km" +
+	
+					"\n\nInsurance Required       : " + shipment.insuranceRequired +
+	
+					"\nOrder Amount             : ₹" + shipment.orderAmount +
+	
+					"\n\nCHARGE BREAKDOWN" +
+					"\n------------------------------------------------------------------" +
+	
+					"\nWeight Charge            : ₹" + weightCharge +
+					"\nDistance Charge          : ₹" + distanceCharge +
+	
+					"\n\nShipping Charge          : ₹" + shippingCharge +
+					"\nInsurance Charge         : ₹" + insurance +
+					"\nGST (" + gstPercentage + "%)              : ₹" + gst +
+					"\nPlatform Fee             : ₹" + platformFee +
+	
+					"\n------------------------------------------------------------------" +
+	
+					"\nTOTAL SHIPPING COST      : ₹" + finalShippingCost +
+	
+					"\n==================================================================" +
+					"\nGENERATED BY PRODUCTHUB SHIPPING SERVICE v1.0" +
+					"\n=================================================================="
+				);
+	}
+	
+}
