@@ -349,4 +349,355 @@ The feature will be accepted only if:
 
 ---
 
-<!-- Q2 -->
+# Question 2
+
+# ProductHub Engineering Team
+
+## Engineering Assignment
+
+**Project:** Hospital Billing System
+
+**Module:** Patient Billing Service
+
+**Department:** Healthcare Management Platform
+
+**Sprint:** Sprint 05
+
+**Story ID:** HMS-BILL-315
+
+**Priority:** High
+
+**Estimated Development Time:** 5–6 Hours
+
+**Assigned To:** Junior Java Backend Developer
+
+---
+
+## 1. Business Background
+
+MediCare Hospitals is developing an internal Hospital Management System (HMS) to digitize patient admissions, billing, pharmacy management, and insurance processing.
+
+Currently, after a patient is discharged, the billing department manually calculates the hospital invoice by combining room charges, doctor consultation fees, medicine charges, and laboratory charges.
+
+This manual process increases billing errors and delays patient discharge.
+
+To automate invoice generation, the Backend Engineering Team has decided to build the first version of the **Patient Billing Service**.
+
+Your responsibility is to implement Version 1 of this utility.
+
+---
+
+## 2. Business Objective
+
+Develop a Java console application named
+
+```
+HospitalBillingSystem
+```
+
+The application shall generate the complete hospital bill for **one patient**.
+
+All patient details shall be accepted using **command-line arguments**.
+
+The program shall calculate all bill components and generate a professional hospital invoice.
+
+---
+
+## 3. Functional Requirements
+
+The application shall capture the following information.
+
+| Field | Required |
+|-------|----------|
+| Patient ID | Yes |
+| Patient Name | Yes |
+| Doctor Name | Yes |
+| Room Type | Yes |
+| Admission Type | Yes |
+| Insurance Provider | Yes |
+| Number of Hospital Days | Yes |
+| Doctor Consultation Fee | Yes |
+| Medicine Charges | Yes |
+| Laboratory Charges | Yes |
+
+---
+
+## 4. Business Rules
+
+### BR-01 — Hospital Name
+
+Hospital Name is fixed.
+
+```
+MediCare Super Speciality Hospital
+```
+
+### BR-02 — Currency
+
+```
+INR
+```
+
+### BR-03 — GST Percentage
+
+```
+18%
+```
+
+### BR-04 — Room Charges
+
+Room charges shall be calculated using the following rates.
+
+| Room Type | Charge Per Day |
+|-----------|---------------|
+| GENERAL | ₹1200 |
+| SEMI_PRIVATE | ₹2500 |
+| PRIVATE | ₹4500 |
+| ICU | ₹8000 |
+
+### BR-05 — Room Charge Formula
+
+```
+Room Charge = Charge Per Day × Number of Hospital Days
+```
+
+### BR-06 — Hospital Service Charge
+
+The hospital charges a fixed service charge.
+
+```
+₹500
+```
+
+### BR-07 — GST Calculation
+
+GST shall be calculated on:
+
+```
+Room Charges + Doctor Consultation Fee + Medicine Charges + Laboratory Charges + Hospital Service Charge
+```
+
+Formula:
+
+```
+GST = Subtotal × 18 / 100
+```
+
+### BR-08 — Final Bill
+
+```
+Final Bill = Subtotal + GST
+```
+
+### BR-09 — Version 1 Assumption
+
+Insurance details are collected only for reporting purposes. Do **not** calculate insurance deductions. Insurance claim processing will be implemented in Version 2.
+
+---
+
+## 5. Supported Room Types
+
+Implement using an enum.
+
+```
+GENERAL
+SEMI_PRIVATE
+PRIVATE
+ICU
+```
+
+---
+
+## 6. Supported Admission Types
+
+Implement using an enum.
+
+```
+EMERGENCY
+PLANNED
+DAY_CARE
+```
+
+---
+
+## 7. Supported Insurance Providers
+
+Implement using an enum.
+
+```
+NONE
+STAR_HEALTH
+HDFC_ERGO
+ICICI_LOMBARD
+NIVA_BUPA
+```
+
+---
+
+## 8. Variable Classification
+
+### Static Variables
+
+The following values are common across every patient. Implement these as **static variables**.
+
+```
+Hospital Name
+Currency
+GST Percentage
+Hospital Service Charge
+```
+
+### Instance Variables
+
+These values belong to one patient. Implement these as **instance variables**.
+
+```
+Patient ID
+Patient Name
+Doctor Name
+Room Type
+Admission Type
+Insurance Provider
+Hospital Days
+Doctor Consultation Fee
+Medicine Charges
+Laboratory Charges
+```
+
+### Local Variables
+
+The following values exist only while generating the invoice. Implement these as **local variables**.
+
+```
+Room Charge
+Subtotal
+GST
+Final Bill
+```
+
+---
+
+## 9. Required Methods
+
+The application **must** contain the following methods. Each method shall have only **one responsibility**. Do not place business calculations directly inside `main()`.
+
+```
+calculateRoomCharge()
+calculateSubtotal()
+calculateGST()
+calculateFinalBill()
+printHospitalInvoice()
+```
+
+---
+
+## 10. Input Specification
+
+The application shall accept command-line arguments in the following order.
+
+| Position | Field |
+|----------|-------|
+| 0 | Patient ID |
+| 1 | Patient Name |
+| 2 | Doctor Name |
+| 3 | Room Type |
+| 4 | Admission Type |
+| 5 | Insurance Provider |
+| 6 | Hospital Days |
+| 7 | Doctor Consultation Fee |
+| 8 | Medicine Charges |
+| 9 | Laboratory Charges |
+
+---
+
+## 11. Expected Console Output
+
+```
+========================================================================
+                  MEDICARE HOSPITAL BILLING REPORT
+========================================================================
+
+HOSPITAL INFORMATION
+------------------------------------------------------------------------
+Hospital Name            : MediCare Super Speciality Hospital
+Currency                 : INR
+GST Percentage           : 18%
+Hospital Service Charge  : ₹500
+
+PATIENT INFORMATION
+------------------------------------------------------------------------
+Patient ID               : PAT-20260705-0012
+Patient Name             : Aaditya Kumar
+Doctor Name              : Dr. Meera Sharma
+
+Admission Type           : EMERGENCY
+Room Type                : PRIVATE
+Insurance Provider       : STAR_HEALTH
+
+Hospital Days            : 4
+
+BILL BREAKDOWN
+------------------------------------------------------------------------
+Room Charges             : ₹18000.00
+Doctor Consultation Fee  : ₹2500.00
+Medicine Charges         : ₹4250.00
+Laboratory Charges       : ₹1800.00
+Hospital Service Charge  : ₹500.00
+
+------------------------------------------------------------------------
+Subtotal                 : ₹27050.00
+GST (18%)                : ₹4869.00
+
+------------------------------------------------------------------------
+TOTAL BILL               : ₹31919.00
+------------------------------------------------------------------------
+
+========================================================================
+      GENERATED BY MEDICARE HOSPITAL BILLING SYSTEM v1.0
+========================================================================
+```
+
+---
+
+## 12. Technical Constraints
+
+Use **only** the following Java concepts:
+
+- Printing statements
+- Variables
+- Operators
+- Methods
+- Enums
+- Command-line arguments
+- One object
+- Static variables
+- Instance variables
+- Local variables
+
+Do **not** use:
+
+- Scanner
+- Arrays (except `args`)
+- Loops
+- `if` / `else`
+- `switch`
+- Collections
+- Constructors
+- Exception handling
+- File handling
+- JDBC
+- Spring Boot
+
+---
+
+## 13. Solution
+
+[HospitalBillingSystem.java](https://github.com/hello-aaditya/java-journey/blob/main/src/coreJava/method/HospitalBillingSystem.java)
+
+---
+
+<br>
+
+---
+
+<!-- Q3 -->
